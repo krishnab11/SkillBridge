@@ -1,0 +1,1342 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Skillbridge - Your Career Journey Starts Here</title>
+    
+    <link rel="icon" type="image/png" href="{{ url_for('static', filename='favicon.png') }}">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <style>
+        :root {
+            --primary-color: #0d6efd; 
+            --dark-color: #212529;
+            --body-color: #495057;
+            --light-color: #f8f9fa;
+            --border-radius: 8px;
+            --shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            color: var(--body-color);
+            background-color: #ffffff;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        a {
+            text-decoration: none;
+            color: var(--dark-color);
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        section {
+            padding: 4rem 0;
+        }
+
+        section h2 {
+            font-size: 2rem;
+            color: var(--dark-color);
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        header {
+            background: #fff;
+            padding: 1rem 0;
+            border-bottom: 1px solid #eee;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--dark-color);
+        }
+
+        .logo i {
+            color: var(--primary-color);
+            margin-right: 8px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 1.5rem;
+        }
+
+        .nav-links a {
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover,
+        .nav-links a.active {
+            color: var(--primary-color);
+        }
+
+        .btn-login {
+            background-color: var(--dark-color);
+            color: #fff;
+            padding: 0.6rem 1.2rem;
+            border-radius: var(--border-radius);
+            transition: background-color 0.3s;
+        }
+
+        .btn-login:hover {
+            background-color: #343a40;
+        }
+
+        .menu-icon {
+            display: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        .hero, .about {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+        }
+
+        .hero-text {
+            flex: 1;
+        }
+
+        .hero-text h1 {
+            font-size: 2.8rem;
+            line-height: 1.2;
+            color: var(--dark-color);
+            margin-bottom: 1rem;
+        }
+
+        .hero-image {
+            flex: 1;
+            text-align: center;
+        }
+
+        .hero-image img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 10px;
+        }
+
+        .banner, .partners, .about, .explore, footer {
+            background-color: var(--light-color);
+            margin-top: 2rem;
+            border-radius: var(--border-radius);
+            padding: 2rem;
+            box-shadow: var(--shadow);
+        }
+
+        .banner p {
+            text-align: center;
+            font-size: 1.2rem;
+            font-weight: 500;
+            color: var(--dark-color);
+        }
+
+        .partners .logos {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 2rem;
+            font-size: 3rem;
+            color: #888;
+        }
+        .partners .logos span {
+            font-size: 2.5rem;
+            font-weight: 600;
+        }
+
+        /* Explore Section */
+        .explore { 
+            text-align: center; 
+        }
+        .explore-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        .explore-card {
+            background: #fff;
+            padding: 2rem;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            text-align: center;
+        }
+        .explore-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+        }
+        .explore-card i {
+            font-size: 3rem;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+        .explore-card h3 {
+            margin-bottom: 1rem;
+            color: var(--dark-color);
+        }
+        .explore-card p {
+            color: var(--body-color);
+            line-height: 1.6;
+        }
+
+        .about-text {
+            flex: 2;
+        }
+
+        .about-text h2 {
+            text-align: left;
+        }
+
+        .about-icons {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            font-size: 3rem;
+            color: var(--primary-color);
+        }
+
+        footer {
+            background-color: var(--dark-color);
+            color: #ccc;
+            margin-top: 2rem;
+            border-radius: 0;
+        }
+
+        .footer-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .contact-info p {
+            margin-bottom: 0.5rem;
+        }
+
+        .contact-info i {
+            margin-right: 10px;
+            color: var(--primary-color);
+        }
+
+        .social-icons a {
+            color: #ccc;
+            font-size: 1.5rem;
+            margin-left: 1rem;
+            transition: color 0.3s;
+        }
+
+        .social-icons a:hover {
+            color: var(--primary-color);
+        }
+
+        /* Auth Modal */
+        .auth-modal-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.45);
+            backdrop-filter: blur(4px);
+            display: none;
+            justify-content: center;
+            align-items: flex-start;
+            padding: 70px 16px 40px;
+            z-index: 1500;
+        }
+        .auth-modal-overlay.active { display: flex; }
+
+        .auth-modal {
+            background: #fff;
+            width: 100%;
+            max-width: 520px;
+            border-radius: 20px;
+            box-shadow: 0 16px 48px -8px rgba(0,0,0,0.35);
+            position: relative;
+            animation: authIn .35s cubic-bezier(.4,0,.2,1);
+            overflow: hidden;
+            max-height: 90vh;
+        }
+        @keyframes authIn {
+            from {opacity:0; transform: translateY(24px) scale(.96);}
+            to {opacity:1; transform: translateY(0) scale(1);}
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 10px;
+            right: 14px;
+            background: transparent;
+            border: none;
+            font-size: 30px;
+            line-height: 1;
+            cursor: pointer;
+            color: #666;
+            transition: color .2s;
+            z-index: 10;
+        }
+        .modal-close:hover { color:#111; }
+
+        .auth-pages { 
+            padding: 42px 42px 50px; 
+            max-height: 70vh;
+            overflow-y: auto;
+        }
+        .auth-pages h2 { margin:0 0 24px; font-size:26px; font-weight:600; text-align:center; }
+
+        .auth-pages .chooser-box,
+        .auth-pages .form-box { background: none; padding:0; box-shadow:none; }
+
+        .auth-pages .options {
+            display:flex;
+            gap:16px;
+            margin-bottom:28px;
+        }
+        .auth-pages .choice-btn {
+            flex:1;
+            padding:14px 10px;
+            background:#4e54c8;
+            color:#fff;
+            font-weight:600;
+            border:none;
+            border-radius:12px;
+            cursor:pointer;
+            transition:.25s;
+        }
+        .auth-pages .choice-btn:hover { background:#343ab6; transform: translateY(-2px); }
+
+        .auth-pages .page { display:none; }
+        .auth-pages .page.active { display:block; }
+
+        .input-group { margin-bottom:16px; }
+        .input-group label { display:block; font-size:.9rem; font-weight:600; margin-bottom:6px; }
+        .input-group input, .input-group select { 
+            width:100%; 
+            padding:12px 14px; 
+            border:1px solid #d6d8ef; 
+            border-radius:10px; 
+            font-family:inherit; 
+            font-size:14px; 
+        }
+        .input-group input:focus, .input-group select:focus { 
+            outline:2px solid #737bff33; 
+            border-color:#4e54c8; 
+        }
+
+        .remember-group {
+            display:flex;
+            justify-content:space-between;
+            align-items:center;
+            font-size:.8rem;
+            margin:4px 0 12px;
+        }
+        .remember-group a { text-decoration:none; color:#4e54c8; }
+
+        .btn.primary {
+            background:#4e54c8;
+            color:#fff;
+            border:none;
+            padding:12px 16px;
+            border-radius:10px;
+            width:100%;
+            font-weight:600;
+            cursor:pointer;
+            transition:.25s;
+            font-size:15px;
+        }
+        .btn.primary:hover { background:#343ab6; }
+
+        .social-login { text-align:center; margin:20px 0 10px; }
+        .social-login p { font-size:.75rem; letter-spacing:1px; color:#777; margin:0 0 10px; }
+        .social-icons { display:flex; gap:14px; justify-content:center; }
+        .social-icon {
+            width:44px; height:44px;
+            display:flex; align-items:center; justify-content:center;
+            border:1px solid #d6d8ef;
+            background:#fff;
+            border-radius:12px;
+            cursor:pointer;
+            font-size:18px;
+            color:#4e54c8;
+            transition:.25s;
+        }
+        .social-icon:hover { background:#4e54c8; color:#fff; }
+
+        .form-footer {
+            text-align: center;
+            margin-top: 18px;
+        }
+
+        .footer-action-btn {
+            background: #4e54c8;
+            color: #fff;
+            border: none;
+            padding: 10px 18px;
+            border-radius: 10px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: background .25s, transform .25s;
+        }
+        .footer-action-btn:hover {
+            background: #343ab6;
+            transform: translateY(-2px);
+        }
+
+        /* Create Account button styled like the blue "Forgot Password?" text */
+        .create-account-btn {
+            background: none;
+            border: none;
+            color: #4e54c8;
+            font-weight: 600;
+            font-size: 0.85rem;
+            cursor: pointer;
+            padding: 6px 10px;
+            border-radius: 6px;
+            transition: color .2s, background .2s;
+        }
+        .create-account-btn:hover {
+            text-decoration: underline;
+            background: #4e54c80d;
+        }
+
+        body.no-scroll { overflow:hidden; }
+
+        /* Password Strength Indicator */
+        .password-strength {
+            margin-top: 0.5rem;
+            height: 4px;
+            border-radius: 2px;
+            background: #e2e8f0;
+            overflow: hidden;
+        }
+
+        .password-strength-bar {
+            height: 100%;
+            transition: all 0.3s ease;
+        }
+
+        .password-strength.weak .password-strength-bar {
+            background: #f56565;
+            width: 33%;
+        }
+
+        .password-strength.medium .password-strength-bar {
+            background: #ed8936;
+            width: 66%;
+        }
+
+        .password-strength.strong .password-strength-bar {
+            background: #48bb78;
+            width: 100%;
+        }
+
+        .password-requirements {
+            margin-top: 0.5rem;
+            font-size: 0.8rem;
+            color: #718096;
+        }
+
+        .password-requirements ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .password-requirements li {
+            margin-bottom: 0.2rem;
+        }
+
+        .password-requirements li.valid {
+            color: #48bb78;
+        }
+
+        .password-requirements li.invalid {
+            color: #718096;
+        }
+
+        .show-password {
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            cursor: pointer;
+            color: #718096;
+        }
+
+        .password-input-container {
+            position: relative;
+        }
+
+        .password-input-container input {
+            width: 100%;
+            padding-right: 40px;
+        }
+
+        /* Scrollbar styling for auth modal */
+        .auth-pages::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .auth-pages::-webkit-scrollbar-track {
+            background: #f1f1f1;
+            border-radius: 10px;
+        }
+
+        .auth-pages::-webkit-scrollbar-thumb {
+            background: #c1c1c1;
+            border-radius: 10px;
+        }
+
+        .auth-pages::-webkit-scrollbar-thumb:hover {
+            background: #a8a8a8;
+        }
+
+        @media (max-width:560px) {
+            .auth-pages { padding:34px 28px 40px; }
+            .auth-modal { border-radius:16px; }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+                flex-direction: column;
+                position: absolute;
+                top: 65px;
+                right: 0;
+                background: #fff;
+                width: 100%;
+                padding: 1rem 0;
+                text-align: center;
+                box-shadow: var(--shadow);
+            }
+
+            .nav-links.active {
+                display: flex;
+            }
+
+            .btn-login {
+                display: none;
+            }
+
+            .menu-icon {
+                display: block;
+            }
+            
+            .hero {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .hero-text h1 {
+                font-size: 2.2rem;
+            }
+            
+            .about {
+                flex-direction: column;
+                text-align: center;
+            }
+            .about-text h2 {
+                text-align: center;
+            }
+            .about-icons {
+                margin-top: 2rem;
+            }
+
+            .explore-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-container {
+                flex-direction: column;
+                text-align: center;
+                gap: 2rem;
+            }
+
+            .social-icons {
+                margin-top: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <nav class="container">
+            <a href="#" class="logo">
+                <i class="fa-solid fa-user-graduate"></i>
+                <span>Skillbridge</span>
+            </a>
+            <ul class="nav-links">
+                <li><a href="#" class="active">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#explore">Explore</a></li>
+                <li><a href="#contact">Contact Us</a></li>
+            </ul>
+            <a id="openAuthModal" class="btn-login" href="#">Login / Sign up</a>
+            <div class="menu-icon">
+                <i class="fa-solid fa-bars"></i>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <section class="hero container">
+            <div class="hero-text">
+                <h1>Unlock Your Potential. Connect with Top Internships.</h1>
+                <p>Seamlessly explore opportunities, build a standout profile, and start your career journey with confidence.</p>
+            </div>
+            <div class="hero-image">
+                <img src="https://images.unsplash.com/photo-1523240795612-9a054b0db644?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="Students collaborating">
+            </div>
+        </section>
+
+        <section class="banner container">
+            <p>Seamlessly explore opportunities that match your profile and kickstart your career journey.</p>
+        </section>
+
+        <section class="partners container">
+            <h2>Companies We Partner With</h2>
+            <div class="logos">
+                <i class="fa-brands fa-google"></i>
+                <i class="fa-brands fa-meta"></i>
+                <i class="fa-brands fa-microsoft"></i>
+                <i class="fa-brands fa-apple"></i>
+                <span>IBM</span>
+            </div>
+        </section>
+
+        <!-- Explore Section -->
+        <section id="explore" class="explore container">
+            <h2>Explore Opportunities</h2>
+            <div class="explore-grid">
+                <div class="explore-card">
+                    <i class="fa-solid fa-code"></i>
+                    <h3>Tech & Development</h3>
+                    <p>Backend, Frontend, Full-stack, Mobile Development, DevOps, AI/ML Engineering</p>
+                </div>
+                <div class="explore-card">
+                    <i class="fa-solid fa-palette"></i>
+                    <h3>Design & Creative</h3>
+                    <p>UI/UX Design, Graphic Design, Product Design, Motion Graphics, Visual Design</p>
+                </div>
+                <div class="explore-card">
+                    <i class="fa-solid fa-chart-line"></i>
+                    <h3>Business & Marketing</h3>
+                    <p>Digital Marketing, Business Analysis, Sales, Content Creation, Social Media Management</p>
+                </div>
+                <div class="explore-card">
+                    <i class="fa-solid fa-flask"></i>
+                    <h3>Research & Analysis</h3>
+                    <p>Data Science, Market Research, Analytics, Business Intelligence, Research Analysis</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="about" class="about container">
+            <div class="about-text">
+                <h2>About the Platform</h2>
+                <p>Skillbridge is designed to connect ambitious students and recent graduates with leading companies worldwide. Our intelligent matching system ensures you find the perfect fit, while our resources help you prepare and excel.</p>
+                <p>Whether you're looking for your first internship or aiming to advance your career, Skillbridge provides the tools, guidance, and connections you need to succeed in today's competitive job market.</p>
+            </div>
+            <div class="about-icons">
+                <i class="fa-solid fa-handshake"></i>
+                <i class="fa-solid fa-magnifying-glass"></i>
+            </div>
+        </section>
+    </main>
+
+    <footer id="contact">
+        <div class="footer-container container">
+            <div class="contact-info">
+                <h3>Contact Info</h3>
+                <p><i class="fa-solid fa-location-dot"></i> 15, Nashik, India</p>
+                <p><i class="fa-solid fa-envelope"></i> skillbridge@gmail.com</p>
+                <p><i class="fa-solid fa-phone"></i> +91 12345 67890</p>
+            </div>
+            <div class="footer-links">
+                <p>&copy; 2025 Skillbridge. All rights reserved.</p>
+                <div class="social-icons">
+                    <a href="#"><i class="fa-brands fa-linkedin"></i></a>
+                    <a href="#"><i class="fa-brands fa-facebook"></i></a>
+                    <a href="#"><i class="fa-brands fa-twitter"></i></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <div id="authOverlay" class="auth-modal-overlay" aria-hidden="true" role="dialog" aria-modal="true">
+      <div class="auth-modal">
+        <button class="modal-close" aria-label="Close window">&times;</button>
+
+        <div class="auth-pages">
+          
+          <!-- Chooser -->
+          <div id="chooserPage" class="page active">
+            <div class="chooser-box">
+              <h2>Are you a...</h2>
+              <div class="options">
+                <button type="button" class="choice-btn" data-target="loginPage" data-user="student">Student</button>
+                <button type="button" class="choice-btn" data-target="companyLoginPage" data-user="company">Company</button>
+              </div>
+              <div class="form-footer">
+                <p>Already have an account? <a data-link-page="loginPage" href="#">Login</a></p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Student Login -->
+          <div id="loginPage" class="page">
+            <div class="form-box">
+              <h2>Student Login</h2>
+              <form id="studentLoginForm" action="#">
+                <div class="input-group">
+                  <label for="login-email">Email</label>
+                  <input type="email" id="login-email" required>
+                </div>
+                <div class="input-group password-input-container">
+                  <label for="login-password">Password</label>
+                  <input type="password" id="login-password" required>
+                  <button type="button" class="show-password">
+                    <i class="fa-solid fa-eye"></i>
+                  </button>
+                  <div class="password-strength">
+                    <div class="password-strength-bar"></div>
+                  </div>
+                </div>
+                <div class="remember-group">
+                  <div>
+                    <input type="checkbox" id="remember">
+                    <label for="remember">Remember me</label>
+                  </div>
+                  <a href="#" data-link-page="forgotPasswordPage">Forgot Password?</a>
+                </div>
+                <button type="submit" class="btn primary">Login</button>
+              </form>
+              <div class="social-login">
+                <p>OR</p>
+                <div class="social-icons">
+                  <button type="button" class="social-icon" aria-label="Login with Google"><i class="fa-brands fa-google"></i></button>
+                  <button type="button" class="social-icon" aria-label="Login with GitHub"><i class="fa-brands fa-github"></i></button>
+                </div>
+              </div>
+              <div class="form-footer">
+                <p>Don't have an account? <button type="button" class="create-account-btn" data-link-page="studentSignupPage">Create one</button></p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Student Signup -->
+          <div id="studentSignupPage" class="page">
+            <div class="form-box">
+              <h2>Student Sign Up</h2>
+              <form id="studentSignupForm" action="#">
+                <div class="input-group">
+                  <label for="student-name">Full Name</label>
+                  <input type="text" id="student-name" required>
+                </div>
+                <div class="input-group">
+                  <label for="student-email">Email</label>
+                  <input type="email" id="student-email" required>
+                </div>
+                <div class="input-group password-input-container">
+                  <label for="student-password">Password</label>
+                  <input type="password" id="student-password" required>
+                  <button type="button" class="show-password">
+                    <i class="fa-solid fa-eye"></i>
+                  </button>
+                  <div class="password-strength">
+                    <div class="password-strength-bar"></div>
+                  </div>
+                  <div class="password-requirements">
+                    <ul>
+                      <li data-requirement="length">At least 8 characters</li>
+                      <li data-requirement="uppercase">One uppercase letter</li>
+                      <li data-requirement="lowercase">One lowercase letter</li>
+                      <li data-requirement="number">One number</li>
+                      <li data-requirement="special">One special character</li>
+                    </ul>
+                  </div>
+                </div>
+                <div class="input-group password-input-container">
+                  <label for="student-confirm-password">Confirm Password</label>
+                  <input type="password" id="student-confirm-password" required>
+                  <button type="button" class="show-password">
+                    <i class="fa-solid fa-eye"></i>
+                  </button>
+                </div>
+                <div class="input-group">
+                  <label for="student-university">University/College</label>
+                  <input type="text" id="student-university" required>
+                </div>
+                <div class="input-group">
+                  <label for="student-major">Major/Field of Study</label>
+                  <input type="text" id="student-major" required>
+                </div>
+                <div class="input-group">
+                  <label for="student-graduation">Expected Graduation Year</label>
+                  <input type="number" id="student-graduation" min="2024" max="2030" required>
+                </div>
+                <div class="input-group">
+                  <label for="student-skills">Skills (comma separated)</label>
+                  <input type="text" id="student-skills" placeholder="e.g., JavaScript, Python, UI/UX Design">
+                </div>
+                <div class="input-group">
+                  <input type="checkbox" id="student-terms" required>
+                  <label for="student-terms">I agree to the Terms & Conditions</label>
+                </div>
+                <button type="submit" class="btn primary">Sign Up</button>
+              </form>
+              <div class="form-footer">
+                <p>Already have an account? <button type="button" class="create-account-btn" data-link-page="loginPage">Login</button></p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Company Login -->
+          <div id="companyLoginPage" class="page">
+            <div class="form-box">
+              <h2>Company Login</h2>
+              <form id="companyLoginForm" action="#">
+                <div class="input-group">
+                  <label for="company-login-email">Email</label>
+                  <input type="email" id="company-login-email" required>
+                </div>
+                <div class="input-group password-input-container">
+                  <label for="company-login-password">Password</label>
+                  <input type="password" id="company-login-password" required>
+                  <button type="button" class="show-password">
+                    <i class="fa-solid fa-eye"></i>
+                  </button>
+                  <div class="password-strength">
+                    <div class="password-strength-bar"></div>
+                  </div>
+                </div>
+                <div class="remember-group">
+                  <div>
+                    <input type="checkbox" id="company-remember">
+                    <label for="company-remember">Remember me</label>
+                  </div>
+                  <a href="#" data-link-page="forgotPasswordPage">Forgot Password?</a>
+                </div>
+                <button type="submit" class="btn primary">Login</button>
+              </form>
+              <div class="social-login">
+                <p>OR</p>
+                <div class="social-icons">
+                  <button type="button" class="social-icon" aria-label="Login with Google"><i class="fa-brands fa-google"></i></button>
+                  <button type="button" class="social-icon" aria-label="Login with GitHub"><i class="fa-brands fa-github"></i></button>
+                </div>
+              </div>
+              <div class="form-footer">
+                <p>Don't have an account? <button type="button" class="create-account-btn" data-link-page="companySignupPage">Create one</button></p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Company Signup -->
+          <div id="companySignupPage" class="page">
+            <div class="form-box">
+              <h2>Company Sign Up</h2>
+              <form id="companySignupForm" action="#">
+                <div class="input-group">
+                  <label for="company-name">Company Name</label>
+                  <input type="text" id="company-name" required>
+                </div>
+                <div class="input-group">
+                  <label for="company-email">Email</label>
+                  <input type="email" id="company-email" required>
+                </div>
+                <div class="input-group password-input-container">
+                  <label for="company-password">Password</label>
+                  <input type="password" id="company-password" required>
+                  <button type="button" class="show-password">
+                    <i class="fa-solid fa-eye"></i>
+                  </button>
+                  <div class="password-strength">
+                    <div class="password-strength-bar"></div>
+                  </div>
+                  <div class="password-requirements">
+                    <ul>
+                      <li data-requirement="length">At least 8 characters</li>
+                      <li data-requirement="uppercase">One uppercase letter</li>
+                      <li data-requirement="lowercase">One lowercase letter</li>
+                      <li data-requirement="number">One number</li>
+                      <li data-requirement="special">One special character</li>
+                    </ul>
+                  </div>
+                </div>
+                <div class="input-group password-input-container">
+                  <label for="company-confirm-password">Confirm Password</label>
+                  <input type="password" id="company-confirm-password" required>
+                  <button type="button" class="show-password">
+                    <i class="fa-solid fa-eye"></i>
+                  </button>
+                </div>
+                <div class="input-group">
+                  <label for="company-industry">Industry</label>
+                  <input type="text" id="company-industry" required>
+                </div>
+                <div class="input-group">
+                  <label for="company-size">Company Size</label>
+                  <select id="company-size" required>
+                    <option value="">Select Size</option>
+                    <option value="1-10">1-10 employees</option>
+                    <option value="11-50">11-50 employees</option>
+                    <option value="51-200">51-200 employees</option>
+                    <option value="201-500">201-500 employees</option>
+                    <option value="500+">500+ employees</option>
+                  </select>
+                </div>
+                <div class="input-group">
+                  <label for="company-website">Website</label>
+                  <input type="url" id="company-website" required>
+                </div>
+                <div class="input-group">
+                  <label for="company-description">Company Description</label>
+                  <textarea id="company-description" rows="3" required></textarea>
+                </div>
+                <div class="input-group">
+                  <label for="company-location">Headquarters Location</label>
+                  <input type="text" id="company-location" required>
+                </div>
+                <div class="input-group">
+                  <label for="company-contact">Contact Person</label>
+                  <input type="text" id="company-contact" required>
+                </div>
+                <div class="input-group">
+                  <label for="company-phone">Contact Phone</label>
+                  <input type="tel" id="company-phone" required>
+                </div>
+                <div class="input-group">
+                  <input type="checkbox" id="company-terms" required>
+                  <label for="company-terms">I agree to the Terms & Conditions</label>
+                </div>
+                <button type="submit" class="btn primary">Sign Up</button>
+              </form>
+              <div class="form-footer">
+                <p>Already have an account? <button type="button" class="create-account-btn" data-link-page="companyLoginPage">Login</button></p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Forgot Password -->
+          <div id="forgotPasswordPage" class="page">
+            <div class="form-box">
+              <h2>Reset Password</h2>
+              <form id="forgotForm" action="#">
+                <div class="input-group">
+                  <label for="forgot-email">Email</label>
+                  <input type="email" id="forgot-email" required>
+                </div>
+                <button type="submit" class="btn primary">Send Link</button>
+              </form>
+              <div class="form-footer">
+                <p><a data-link-page="loginPage" href="#">Back to Login</a></p>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <script>
+    const menuIcon = document.querySelector('.menu-icon');
+    const navLinks = document.querySelector('.nav-links');
+
+    menuIcon.addEventListener('click', () => {
+        navLinks.classList.toggle('active');
+    });
+
+    // Smooth scrolling for navigation links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+            const target = document.querySelector(this.getAttribute('href'));
+            if (target) {
+                target.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+            }
+        });
+    });
+
+    document.addEventListener('DOMContentLoaded', () => {
+        const overlay = document.getElementById('authOverlay');
+        const openBtn = document.getElementById('openAuthModal');
+        const closeBtn = overlay.querySelector('.modal-close');
+
+        function showAuthPage(id) {
+            overlay.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+            const target = overlay.querySelector('#' + id);
+            if (target) target.classList.add('active');
+            
+            // Scroll to top when switching pages
+            const authPages = overlay.querySelector('.auth-pages');
+            if (authPages) {
+                authPages.scrollTop = 0;
+            }
+        }
+
+        function openAuth() {
+            overlay.classList.add('active');
+            document.body.classList.add('no-scroll');
+            showAuthPage('chooserPage');
+            setTimeout(() => {
+                const focusEl = overlay.querySelector('.choice-btn');
+                if (focusEl) focusEl.focus();
+            }, 30);
+        }
+
+        function closeAuth() {
+            overlay.classList.remove('active');
+            document.body.classList.remove('no-scroll');
+        }
+
+        openBtn.addEventListener('click', e => {
+            e.preventDefault();
+            openAuth();
+        });
+
+        closeBtn.addEventListener('click', closeAuth);
+
+        overlay.addEventListener('click', e => {
+            if (e.target === overlay) closeAuth();
+        });
+
+        document.addEventListener('keydown', e => {
+            if (e.key === 'Escape' && overlay.classList.contains('active')) closeAuth();
+        });
+
+        // Delegated clicks inside modal
+        overlay.addEventListener('click', e => {
+            const chooser = e.target.closest('.choice-btn');
+            if (chooser) {
+                const target = chooser.getAttribute('data-target');
+                const userType = chooser.getAttribute('data-user');
+                // Store user type for registration
+                document.querySelectorAll('form').forEach(form => {
+                    if (form.querySelector('input[name="user_type"]')) {
+                        form.querySelector('input[name="user_type"]').value = userType;
+                    }
+                });
+                showAuthPage(target);
+            }
+            
+            const link = e.target.closest('[data-link-page]');
+            if (link) {
+                e.preventDefault();
+                showAuthPage(link.getAttribute('data-link-page'));
+            }
+            
+            const createAccountBtn = e.target.closest('.create-account-btn');
+            if (createAccountBtn) {
+                e.preventDefault();
+                showAuthPage(createAccountBtn.getAttribute('data-link-page'));
+            }
+        });
+
+        // Password strength checking
+        function checkPasswordStrength(event) {
+            const password = event.target.value;
+            const container = event.target.parentElement;
+            const strengthBar = container.querySelector('.password-strength-bar');
+            const requirements = container.querySelector('.password-requirements');
+            
+            if (!strengthBar) return;
+            
+            let strength = 0;
+            let requirementsMet = {
+                length: password.length >= 8,
+                uppercase: /[A-Z]/.test(password),
+                lowercase: /[a-z]/.test(password),
+                number: /\d/.test(password),
+                special: /[!@#$%^&*(),.?":{}|<>]/.test(password)
+            };
+            
+            // Calculate strength
+            if (requirementsMet.length) strength += 20;
+            if (requirementsMet.uppercase) strength += 20;
+            if (requirementsMet.lowercase) strength += 20;
+            if (requirementsMet.number) strength += 20;
+            if (requirementsMet.special) strength += 20;
+            
+            // Update strength bar
+            strengthBar.style.width = strength + '%';
+            
+            // Update strength class
+            const strengthContainer = container.querySelector('.password-strength');
+            strengthContainer.className = 'password-strength';
+            if (strength < 40) {
+                strengthContainer.classList.add('weak');
+            } else if (strength < 80) {
+                strengthContainer.classList.add('medium');
+            } else {
+                strengthContainer.classList.add('strong');
+            }
+            
+            // Update requirements list
+            if (requirements) {
+                const requirementItems = requirements.querySelectorAll('li');
+                requirementItems.forEach(item => {
+                    const requirement = item.getAttribute('data-requirement');
+                    if (requirementsMet[requirement]) {
+                        item.classList.add('valid');
+                        item.classList.remove('invalid');
+                    } else {
+                        item.classList.add('invalid');
+                        item.classList.remove('valid');
+                    }
+                });
+            }
+        }
+
+        // Password show/hide functionality
+        function setupPasswordToggle() {
+            overlay.querySelectorAll('.password-input-container input').forEach(input => {
+                const container = input.parentElement;
+                const showBtn = container.querySelector('.show-password');
+                if (showBtn) {
+                    showBtn.addEventListener('click', () => {
+                        const type = input.getAttribute('type') === 'password' ? 'text' : 'password';
+                        input.setAttribute('type', type);
+                        showBtn.innerHTML = type === 'password' ? '<i class="fa-solid fa-eye"></i>' : '<i class="fa-solid fa-eye-slash"></i>';
+                    });
+                }
+            });
+        }
+
+        // Password strength checking
+        overlay.querySelectorAll('input[type="password"]').forEach(input => {
+            input.addEventListener('input', checkPasswordStrength);
+        });
+
+        setupPasswordToggle();
+
+        // Replace the form submission handler in homepage.html
+        overlay.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            try {
+                if (e.target.matches('#studentSignupForm')) {
+                    const formData = {
+                        email: document.getElementById('student-email').value,
+                        password: document.getElementById('student-password').value,
+                        confirm_password: document.getElementById('student-confirm-password').value,
+                        user_type: 'student',
+                        full_name: document.getElementById('student-name').value,
+                        college: document.getElementById('student-university').value,
+                        course: document.getElementById('student-major').value,
+                        graduation_year: document.getElementById('student-graduation').value,
+                        skills: document.getElementById('student-skills').value
+                    };
+                    
+                    // Validate passwords match
+                    if (formData.password !== formData.confirm_password) {
+                        alert('Passwords do not match');
+                        return;
+                    }
+                    
+                    const response = await fetch('/register', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify(formData)
+                    });
+                    
+                    const data = await response.json();
+                    
+                    if (response.ok) {
+                        alert(data.message || 'Registration successful!');
+                        
+                        // Store token if provided
+                        if (data.token) {
+                            localStorage.setItem('token', data.token);
+                            localStorage.setItem('user_type', data.user_type || 'student');
+                        }
+                        
+                        // Redirect based on user type
+                        if (data.user_type === 'student') {
+                            window.location.href = '/student-dashboard';
+                        } else {
+                            window.location.href = '/company-dashboard';
+                        }
+                        closeAuth();
+                    } else {
+                        alert(data.error || 'Registration failed. Please try again.');
+                    }
+                    
+                } else if (e.target.matches('#studentLoginForm')) {
+                    const formData = {
+                        email: document.getElementById('login-email').value,
+                        password: document.getElementById('login-password').value,
+                        user_type: 'student'
+                    };
+                    
+                    const response = await fetch('/login', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify(formData)
+                    });
+                    
+                    const data = await response.json();
+                    
+                    if (response.ok) {
+                        alert(data.message || 'Login successful!');
+                        
+                        // Store token if provided
+                        if (data.token) {
+                            localStorage.setItem('token', data.token);
+                            localStorage.setItem('user_type', data.user_type || 'student');
+                        }
+                        
+                        // Redirect based on user type
+                        if (data.user_type === 'student') {
+                            window.location.href = '/student-dashboard';
+                        } else {
+                            window.location.href = '/company-dashboard';
+                        }
+                        closeAuth();
+                    } else {
+                        alert(data.error || 'Login failed. Please check your credentials.');
+                    }
+                } else if (e.target.matches('#companySignupForm')) {
+                    // Company signup -> create account then redirect to company dashboard
+                    const formData = {
+                        user_type: 'company',
+                        company_name: document.getElementById('company-name').value,
+                        email: document.getElementById('company-email').value,
+                        password: document.getElementById('company-password').value,
+                        confirm_password: document.getElementById('company-confirm-password').value,
+                        industry: document.getElementById('company-industry').value,
+                        company_size: document.getElementById('company-size').value,
+                        website: document.getElementById('company-website').value,
+                        description: document.getElementById('company-description').value,
+                        location: document.getElementById('company-location').value,
+                        contact_person: document.getElementById('company-contact').value,
+                        mobile: document.getElementById('company-phone').value
+                    };
+
+                    if (formData.password !== formData.confirm_password) {
+                        alert('Passwords do not match');
+                        return;
+                    }
+
+                    const response = await fetch('/register', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(formData)
+                    });
+
+                    const data = await response.json();
+
+                    if (response.ok) {
+                        alert(data.message || 'Registration successful!');
+                        if (data.token) {
+                            localStorage.setItem('token', data.token);
+                            localStorage.setItem('user_type', data.user_type || 'company');
+                        }
+                        // Prefer backend-provided redirect_url
+                        if (data.redirect_url) {
+                            window.location.href = data.redirect_url;
+                        } else {
+                            window.location.href = '/company-dashboard';
+                        }
+                        closeAuth();
+                    } else {
+                        alert(data.error || 'Registration failed. Please try again.');
+                    }
+                } else if (e.target.matches('#companyLoginForm')) {
+                    // Company login -> redirect to company dashboard
+                    const formData = {
+                        user_type: 'company',
+                        email: document.getElementById('company-login-email').value,
+                        password: document.getElementById('company-login-password').value,
+                    };
+
+                    const response = await fetch('/login', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(formData)
+                    });
+
+                    const data = await response.json();
+
+                    if (response.ok) {
+                        alert(data.message || 'Login successful!');
+                        if (data.token) {
+                            localStorage.setItem('token', data.token);
+                            localStorage.setItem('user_type', data.user_type || 'company');
+                        }
+                        if (data.redirect_url) {
+                            window.location.href = data.redirect_url;
+                        } else {
+                            window.location.href = '/company-dashboard';
+                        }
+                        closeAuth();
+                    } else {
+                        alert(data.error || 'Login failed. Please check your credentials.');
+                    }
+                }
+                // ... handle other forms similarly
+            } catch (error) {
+                console.error('Error:', error);
+                alert('An error occurred. Please try again.');
+            }
+        });
+
+        // Add hidden user_type fields to forms
+        const forms = overlay.querySelectorAll('form');
+        forms.forEach(form => {
+            if (!form.querySelector('input[name="user_type"]')) {
+                const hiddenInput = document.createElement('input');
+                hiddenInput.type = 'hidden';
+                hiddenInput.name = 'user_type';
+                hiddenInput.value = 'student'; // default
+                form.appendChild(hiddenInput);
+            }
+        });
+    });
+</script>
+</body>
+</html>
