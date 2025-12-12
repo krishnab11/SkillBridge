@@ -4,3 +4,4 @@ PyJWT==2.8.0
 Werkzeug==2.3.7
 cloudinary==1.36.0
 python-dotenv==1.0.0
+gunicorn
